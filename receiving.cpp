@@ -476,9 +476,13 @@ static void requestInlineDownload(const char *sender, const td::td_api::file &fi
     info->transceiver = &transceiver;
     info->account = &account;
 
+    int purpleId = account.getPurpleChatId(getId(chat));
+    PurpleConvChat *conv = getChatConversation(account, chat, purpleId);
+    PurpleConversation *baseConv = conv ? purple_conv_chat_get_conversation(conv) : NULL;
+
     // TRANSLATOR: Download dialog, title
     purple_request_action(purple_account_get_connection(account.purpleAccount), _("Download"), question.c_str(),
-                          fileInfo.c_str(), 0, account.purpleAccount, NULL, NULL,
+                          fileInfo.c_str(), 0, account.purpleAccount, sender, baseConv,
                           // TRANSLATOR: Download dialog, alternative is "_No"
                           info, 2, _("_Yes"), startInlineDownload,
                           // TRANSLATOR: Download dialog, alternative is "_Yes"

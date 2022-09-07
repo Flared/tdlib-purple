@@ -461,11 +461,12 @@ static void requestInlineDownload(const char *sender, const td::td_api::file &fi
     unsigned    size     = getFileSize(file);
     // This dialog is used for files larger than the limit, so size should be non-zero
     char *      sizeStr  = purple_str_size_to_units(size);
+    std::string timestampStr = std::to_string(message.timestamp);
     // TRANSLATOR: Download dialog, placeholder chat title, in the sentence "posted in a private chat".
     std::string chatName = isPrivateChat(chat) ? _("a private chat") : chat.title_;
     // TRANSLATOR: Download dialog, secondary content. Arguments will be file description (text), chat name (text), and a file size (text!)
-    std::string fileInfo = formatMessage(_("{0} posted in {1}, size: {2}"), {fileDesc,
-                                         chatName, std::string(sizeStr)});
+    std::string fileInfo = formatMessage(_("{0} posted in {1}, timestamp: {2}, size: {3}"), {fileDesc,
+                                         chatName, timestampStr, std::string(sizeStr)});
     g_free(sizeStr);
 
     InlineDownloadInfo *info = new InlineDownloadInfo;

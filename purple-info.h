@@ -50,6 +50,8 @@ namespace AccountOptions {
     constexpr gboolean    KeepInlineDownloadsDefault = FALSE;
     constexpr const char *ReadReceipts               = "read-receipts";
     constexpr gboolean    ReadReceiptsDefault        = TRUE;
+    constexpr const char *UseMessageDatabase         = "use-message-database";
+    constexpr gboolean    UseMessageDatabaseDefault  = TRUE;
 };
 
 namespace BuddyOptions {
